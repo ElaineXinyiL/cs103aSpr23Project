@@ -35,9 +35,11 @@ def index():
     return f'''
         <h1>GPT Demo</h1>
         <p>links of pages</p>
-        <a href="{url_for('about')}">About the app</a>
-        <a href="{url_for('team')}">Introduction of the team</a>
-        <a href="{url_for('form1')}">Find grammar errors of sentences</a>
+        <ul>
+        <li><a href="{url_for('about')}">About the app</a></li>
+        <li><a href="{url_for('team')}">Introduction of the team</a></li>
+        <li><a href="{url_for('form1')}">Find grammar errors of sentences</a></li>
+        </ul>
     '''
 @app.route('/about')
 def about():
@@ -76,8 +78,8 @@ def form1():
         '''
     else:
         return '''
-        <h1>GPT Demo App</h1>
-        Enter your query below
+        <h1>Find grammar errors</h1>
+        Enter your scentences below
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
