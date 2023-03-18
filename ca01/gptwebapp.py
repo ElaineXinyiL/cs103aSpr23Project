@@ -28,33 +28,51 @@ gptAPI = GPT(os.environ.get('APIKEY'))
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q789789uioujkkljkl...8z\n\xec]/'
 
-@app.route('/')
+@app.route('/index')
 def index():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
-        <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <p>links of pages</p>
+        <a href="{url_for('about')}">About the app</a>
+        <a href="{url_for('team')}">Introduction of the team</a>
+        <a href="{url_for('form1')}">Find grammar errors of sentences</a>
+    '''
+@app.route('/about')
+def about():
+    ''' what your program does '''
+    return f'''
+        <h1>About</h1>
+        <p>Xin Yi Liu: Find grammar errors of sentences</p>
     '''
 
+@app.route('/team')
+def team():
+    ''' short bio of each member and role '''
+    return f'''
+        <h1>Team</h1>
+        <h3>Xin Yi Liu</h3>
+        <p>develop a form page to find grammar errors, and modify other pages</p>
+    '''
 
-@app.route('/gptdemo', methods=['GET', 'POST'])
-def gptdemo():
+@app.route('/form1', methods=['GET', 'POST'])
+def form1():
     ''' handle a get request by sending a form 
         and a post request by returning the GPT response
     '''
     if request.method == 'POST':
-        prompt = request.form['prompt']
-        answer = gptAPI.getResponse(prompt)
+        prompt = request.form['prompt'] 
+        answer = gptAPI.getResponse("can you find grammar errors of the following sentences:"+prompt)
         return f'''
-        <h1>GPT Demo</h1>
+        <h1>Find grammar errors</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
         <hr>
         Here is the answer in text mode:
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('gptdemo')}> make another query</a>
+        <a href={url_for('form1')}> make another query</a>
         '''
     else:
         return '''
