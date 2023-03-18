@@ -63,7 +63,7 @@ def form1():
     '''
     if request.method == 'POST':
         prompt = request.form['prompt'] 
-        answer = gptAPI.getResponse("can you find grammar errors of the following sentences:"+prompt)
+        answer = gptAPI.getResponse1(prompt)
         return f'''
         <h1>Find grammar errors</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
