@@ -45,6 +45,20 @@ class GPT():
         response = completion.choices[0].text
         return response
 
+    def getResponse1(self,prompt):
+        ''' Generate a GPT response '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt="can you find grammar errors of the following sentences:"+prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        return response
+
 if __name__=='__main__':
     '''
     '''
