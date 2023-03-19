@@ -179,6 +179,7 @@ def index():
                 <li><a href="{url_for('joke')}">Demo2: Keyword-Based Joke Generator</a></li>
                 <li><a href="{url_for('horror')}">Demo3: Get a horror story by keywords</a></li>
                 <li><a href="{url_for('rap')}">Demo4: Generate a rap battle</a></li>
+                <li><a href="{url_for('rap')}">Demo5: Get a movie line by keywords</a></li>
             </ul>
         </nav>
         <div class="container">
@@ -216,6 +217,9 @@ def about():
             <h3 class="keyword">Ruihao Shen</h3>
             <p>Brandeis 24' MS3 CS</p>
             <p>Demo4: Generate a rap battle</p>
+            <h3 class="keyword">Yichun Huang</h3>
+            <p>Brandeis 24' MS4 CS</p>
+            <p>Demo4: Get a movie line by keywords</p>
         </div>
     '''
 
@@ -242,6 +246,8 @@ def team():
             <p>developed a form page to get a horror story by keywords</p>
             <h2 class="keyword">Ruihao Shen</h2>
             <p>developed a rap battle generator between whoever you want</p>
+            <h2 class="keyword">Yichun Huang</h2>
+            <p>developed a form page to get a movie line, containing given keywords</p>
         </div>
     '''
 
@@ -455,7 +461,67 @@ def rap():
         </form>
         '''
 
+@app.route('/movieline', methods=['GET', 'POST'])
+def movieline():
+    ''' handle a get request by sending a form
+    and a post request by returning the GPT response to generate movie lines
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.getResponseMovieLine(prompt)
+        return f'''
+        <html>
+        <head>
+            <title>Movie Line Generator</title>
+            <style>
+                /* Add the given styles here */
+                {STYLES}
+            </style>
+        </head>
+        <body>
+            <header>
+            <h1>Movie Line Generator</h1>
+            </header>
+            <div class="container">
+                <pre>Keywords: <span class="keyword">{prompt}</span></pre>
+                <hr>
+            </div>
+            <div class="container">
+                <pre class="movieline-response">{answer}</pre>
+            </div>
+            <div class="container">
+                <a href={url_for('movieline')}> Make Another Query</a>
+            </div>
+        </body>
+        </html>
+        '''
+    else:
+        return f'''
+        <html>
+        <head>
+            <title>Movie Line Generator</title>
+            <style>{STYLES}</style>
+        </head>
+        <body>
+            <header>
+            <h1>Movie Line Generator</h1>
+            </header>
+            <div class="front">
+                <h2>Generate a movie line based on keywords</h2>
+                <hr>
+                <h3>Type in a few keywords:</h3>
+            </div>
+            <div class="text-form">
+                <form method="post">
+                    <textarea name="prompt"></textarea>
+                    <p><input type=submit value="get response">
+                </form>
+            </div>
+        </body>
+        </html>
+        '''
+
 
 if __name__ == '__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5000)
