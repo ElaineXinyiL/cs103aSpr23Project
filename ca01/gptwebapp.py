@@ -158,7 +158,6 @@ STYLES = '''
 '''
 
 
-@app.route('/index')
 @app.route('/')
 def index():
     ''' display a link to the general query page '''
@@ -179,6 +178,7 @@ def index():
                 <li><a href="{url_for('form1')}">Demo1: Grammar Error Detection</a></li>
                 <li><a href="{url_for('joke')}">Demo2: Keyword-Based Joke Generator</a></li>
                 <li><a href="{url_for('horror')}">Demo3: Get a horror story by keywords</a></li>
+                <li><a href="{url_for('rap')}">Demo4: Generate a rap battle</a></li>
             </ul>
         </nav>
         <div class="container">
@@ -213,6 +213,9 @@ def about():
             <h3 class="keyword">Yixuan He</h3>
             <p>Brandeis 24' MS4 CS</p>
             <p>Demo3: Get a horror story by keywords</p>
+            <h3 class="keyword">Ruihao Shen</h3>
+            <p>Brandeis 24' MS3 CS</p>
+            <p>Demo4: Generate a rap battle</p>
         </div>
     '''
 
@@ -237,6 +240,8 @@ def team():
             <p>developed a form page to generate a joke based on keywords, added some basic UI</p>
             <h2 class="keyword">Yixuan He</h2>
             <p>developed a form page to get a horror story by keywords</p>
+            <h2 class="keyword">Ruihao Shen</h2>
+            <p>developed a rap battle generator between whoever you want</p>
         </div>
     '''
 
@@ -421,6 +426,33 @@ def horror():
             </div>
         </body>
         </html>
+        '''
+    
+@app.route('/rap', methods=['GET', 'POST'])
+def rap():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt'] 
+        answer = gptAPI.getRapBattle(prompt)
+        return f'''
+        <h1>Want an EPIC rap battle? You got it!</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black;white-space: pre-wrap">{answer}</div>
+        <a href={url_for('rap')}> make another EPIC battle!</a>
+
+        '''
+    else:
+        return '''
+        <h1>Want an EPIC rap battle? You got it!</h1>
+        Name your fighters!!!
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
         '''
 
 
