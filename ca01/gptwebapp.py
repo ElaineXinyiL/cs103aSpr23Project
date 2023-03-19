@@ -66,6 +66,10 @@ STYLES = '''
                 padding: 20px;
                 margin-left: 60px;
             }
+            pre.movieline-response {
+                width: 60%;
+                font-style: italic;
+            }
             hr {
                 border: none;
                 height: 0.5rem;
@@ -219,7 +223,7 @@ def about():
             <p>Demo4: Generate a rap battle</p>
             <h3 class="keyword">Yichun Huang</h3>
             <p>Brandeis 24' MS4 CS</p>
-            <p>Demo4: Get a movie line by keywords</p>
+            <p>Demo5: Get a movie line by keywords</p>
         </div>
     '''
 
@@ -502,6 +506,8 @@ def movieline():
     if request.method == 'POST':
         prompt = request.form['prompt']
         answer = gptAPI.getResponseMovieLine(prompt)
+        answer = answer.replace("-", "<br/>-")
+        answer = answer.replace("～", "<br/>～")
         return f'''
         <html>
         <head>
@@ -553,6 +559,7 @@ def movieline():
         </body>
         </html>
         '''
+
 
 
 if __name__ == '__main__':
