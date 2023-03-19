@@ -250,23 +250,55 @@ def form1():
         prompt = request.form['prompt']
         answer = gptAPI.getResponse1(prompt)
         return f'''
-        <h1>Find grammar errors</h1>
-        <pre style="bgcolor:yellow">{prompt}</pre>
-        <hr>
-        Here is the answer in text mode:
-        <div style="border:thin solid black">{answer}</div>
-        Here is the answer in "pre" mode:
-        <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('form1')}> make another query</a>
+        <html>
+        <head>
+            <title>Find grammar errors</title>
+            <style>
+                /* Add the given styles here */
+                {STYLES}
+            </style>
+        </head>
+        <body>
+            <header>
+            <h1>Find grammar errors</h1>
+            </header>
+            <div class="container">
+                <pre>Your sentences: <span class="keyword">{prompt}</span></pre>
+                <hr>
+            </div>
+            <div class="container">
+                <pre>{answer}</pre>
+            </div>
+            <div class="container">
+                <a href={url_for('form1')}> Make Another Query</a>
+            </div>
+        </body>
+        </html>
         '''
     else:
         return '''
-        <h1>Find grammar errors</h1>
-        Enter your sentences below
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p><input type=submit value="get response">
-        </form>
+        <html>
+        <head>
+            <title>Find grammar errors</title>
+            <style>{STYLES}</style>
+        </head>
+        <body>
+            <header>
+            <h1>Find grammar errors</h1>
+            </header>
+            <div class="front">
+                <h2>Find grammar errors</h2>
+                <hr>
+                <h3>Enter your sentences below</h3>
+            </div>
+            <div class="text-form">
+                <form method="post">
+                    <textarea name="prompt"></textarea>
+                    <p><input type=submit value="get response">
+                </form>
+            </div>
+        </body>
+        </html>
         '''
 
 
