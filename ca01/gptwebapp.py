@@ -210,7 +210,7 @@ def about():
         </header>
         <div class="container">
             <h3 class="keyword">Xin Yi Liu</h3>
-            <p>Brandeis 23' MS3 CS</p>
+            <p>Brandeis 24' MS3 CS</p>
             <p>Demo1: Find grammar errors of sentences</p>
             <h3 class="keyword">Hongqian Li</h3>
             <p>Brandeis 24' MS4 CS</p>
