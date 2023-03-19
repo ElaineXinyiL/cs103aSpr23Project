@@ -435,24 +435,57 @@ def rap():
     '''
     if request.method == 'POST':
         prompt = request.form['prompt'] 
-        answer = gptAPI.getRapBattle(prompt)
+        answer = gptAPI.getRapBattle(prompt).strip()
         return f'''
-        <h1>Want an EPIC rap battle? You got it!</h1>
-        <pre style="bgcolor:yellow">{prompt}</pre>
-        <hr>
-        Here is the answer in text mode:
-        <div style="border:thin solid black;white-space: pre-wrap">{answer}</div>
-        <a href={url_for('rap')}> make another EPIC battle!</a>
-
+        <html>
+        <head>
+            <title>EPIC Rap Battle Generator</title>
+            <style>
+                /* Add the given styles here */
+                {STYLES}
+            </style>
+        </head>
+        <body>
+            <header>
+            <h1>EPIC Rap Battle Generator</h1>
+            </header>
+            <div class="container">
+                <pre>Battlers: <span class="keyword">{prompt}</span></pre>
+                <hr>
+            </div>
+            <div class="container">
+                <pre>{answer}</pre>
+            </div>
+            <div class="container">
+                <a href={url_for('rap')}> Make Another Query</a>
+            </div>
+        </body>
+        </html>
         '''
     else:
         return f'''
-        <h1>Want an EPIC rap battle? You got it!</h1>
-        Name your fighters!!!
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p><input type=submit value="get response">
-        </form>
+        <html>
+        <head>
+            <title>EPIC Rap Battle Generator</title>
+            <style>{STYLES}</style>
+        </head>
+        <body>
+            <header>
+            <h1>EPIC Rap Battle Generator</h1>
+            </header>
+            <div class="front">
+                <h2>Want an EPIC rap battle? You got it!</h2>
+                <hr>
+                <h3>Name your fighters!!!</h3>
+            </div>
+            <div class="text-form">
+                <form method="post">
+                    <textarea name="prompt"></textarea>
+                    <p><input type=submit value="get response">
+                </form>
+            </div>
+        </body>
+        </html>
         '''
 
 
