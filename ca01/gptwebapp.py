@@ -24,7 +24,6 @@ import os
 
 app = Flask(__name__)
 gptAPI = GPT(os.environ.get('APIKEY'))
-print(os.environ.get('APIKEY'))
 
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q789789uioujkkljkl...8z\n\xec]/'
@@ -62,6 +61,10 @@ STYLES = '''
                 font-size: 1.8rem;
                 white-space: pre-wrap;
                 word-wrap: break-word;
+            }
+            pre.horror-response {
+                padding: 20px;
+                margin-left: 60px;
             }
             hr {
                 border: none;
@@ -159,7 +162,6 @@ STYLES = '''
 @app.route('/')
 def index():
     ''' display a link to the general query page '''
-    print('processing / route')
     return f'''
         <html>
         <head>
@@ -338,22 +340,55 @@ def horror():
         prompt = request.form['prompt']
         answer = gptAPI.getResponseHorror(prompt)
         return f'''
-        <h1>Get a horror story by keywords</h1>
-        <pre style="bgcolor:yellow">{prompt}</pre>
-        <hr>
-        Here is the answer in text mode:
-        <div style="border:thin solid black">{answer}</div>
-        <a href={url_for('horror')}> make another query</a>
-
+        <html>
+        <head>
+            <title>Horror story Generator</title>
+            <style>
+                /* Add the given styles here */
+                {STYLES}
+            </style>
+        </head>
+        <body>
+            <header>
+            <h1>Horror story Generator</h1>
+            </header>
+            <div class="container">
+                <pre>Keywords: <span class="keyword">{prompt}</span></pre>
+                <hr>
+            </div>
+            <div class="container">
+                <pre class="horror-response">{answer}</pre>
+            </div>
+            <div class="container">
+                <a href={url_for('horror')}> Make Another Query</a>
+            </div>
+        </body>
+        </html>
         '''
     else:
-        return '''
-        <h1>Get a horror story by keywords</h1>
-        Enter your sentences below
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p><input type=submit value="get response">
-        </form>
+        return f'''
+        <html>
+        <head>
+            <title>Horror story Generator</title>
+            <style>{STYLES}</style>
+        </head>
+        <body>
+            <header>
+            <h1>Horror story Generator</h1>
+            </header>
+            <div class="front">
+                <h2>Get a horror story by keywords</h2>
+                <hr>
+                <h3>Type in a few keywords:</h3>
+            </div>
+            <div class="text-form">
+                <form method="post">
+                    <textarea name="prompt"></textarea>
+                    <p><input type=submit value="get response">
+                </form>
+            </div>
+        </body>
+        </html>
         '''
 
 

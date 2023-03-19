@@ -64,13 +64,12 @@ class GPT():
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt="Can you generate a horror story based on following key words? "+prompt,
+            prompt="Generate a short horror story including given keywords:" + prompt,
             max_tokens=1024,
             n=1,
             stop=None,
             temperature=0.8,
         )
-
         response = completion.choices[0].text
         return response
 
