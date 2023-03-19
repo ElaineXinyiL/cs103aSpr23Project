@@ -210,7 +210,7 @@ def about():
             <p>Demo2: Generate a simple joke based on keywords</p>
             <h3 class="keyword">Yixuan He</h3>
             <p>Brandeis 24' MS4 CS</p>
-            <p>Demo2: Get a horror story by keywords</p>
+            <p>Demo3: Get a horror story by keywords</p>
         </div>
     '''
 
