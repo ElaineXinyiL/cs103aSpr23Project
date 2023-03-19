@@ -70,9 +70,7 @@ class GPT():
             stop=None,
             temperature=0.8,
         )
-        print(prompt)
         response = completion.choices[0].text
-        print(completion.choices)
         return response
 
     def getResponseJoke(self, prompt):
