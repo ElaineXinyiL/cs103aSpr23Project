@@ -64,7 +64,9 @@ class GPT():
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt="Generate a short horror story including given keywords:" + prompt,
+            prompt= f"""
+            Generate a short horror story including {prompt}
+            """,
             max_tokens=1024,
             n=1,
             stop=None,
