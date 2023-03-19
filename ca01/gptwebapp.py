@@ -39,6 +39,7 @@ def index():
         <li><a href="{url_for('about')}">About the app</a></li>
         <li><a href="{url_for('team')}">Introduction of the team</a></li>
         <li><a href="{url_for('form1')}">Find grammar errors of sentences</a></li>
+        <li><a href="{url_for('horror')}">Get a horror story by keywords</a></li>
         </ul>
     '''
 @app.route('/about')
@@ -47,6 +48,7 @@ def about():
     return f'''
         <h1>About</h1>
         <p>Xin Yi Liu: Find grammar errors of sentences</p>
+        <p>Yixuan He: Get a horror story by keywords</p>
     '''
 
 @app.route('/team')
@@ -56,6 +58,8 @@ def team():
         <h1>Team</h1>
         <h3>Xin Yi Liu</h3>
         <p>develop a form page to find grammar errors, and modify other pages</p>
+        <h3>Yixuan He</h3>
+        <p>develop a form page to get a horror story by keywords</p>
     '''
 
 @app.route('/form1', methods=['GET', 'POST'])
@@ -79,6 +83,33 @@ def form1():
     else:
         return '''
         <h1>Find grammar errors</h1>
+        Enter your scentences below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
+@app.route('/horror', methods=['GET', 'POST'])
+def horror():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt'] 
+        answer = gptAPI.getResponseHorror(prompt)
+        return f'''
+        <h1>Get a horror story by keywords</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        <a href={url_for('horror')}> make another query</a>
+
+        '''
+    else:
+        return '''
+        <h1>Get a horror story by keywords</h1>
         Enter your scentences below
         <form method="post">
             <textarea name="prompt"></textarea>
