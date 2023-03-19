@@ -210,7 +210,7 @@ def about():
             <p>Demo2: Generate a simple joke based on keywords</p>
             <h3 class="keyword">Yixuan He</h3>
             <p>Brandeis 24' MS4 CS</p>
-            <p>Demo2: Get a horror story by keywords</p>
+            <p>Demo3: Get a horror story by keywords</p>
         </div>
     '''
 
@@ -269,6 +269,10 @@ def form1():
 
 @app.route('/joke', methods=['GET', 'POST'])
 def joke():
+    ''' handle a get request by sending a form 
+    and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
         prompt = request.form['prompt']
         answer = gptAPI.getResponseJoke(prompt)
         return f'''
@@ -343,7 +347,7 @@ def horror():
     else:
         return '''
         <h1>Get a horror story by keywords</h1>
-        Enter your scentences below
+        Enter your sentences below
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
