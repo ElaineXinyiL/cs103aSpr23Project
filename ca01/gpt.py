@@ -106,16 +106,16 @@ class GPT():
         response = completion.choices[0].text
         return response
 
-        def getResponseMovieLine(self, prompt):
-            ''' Generate a GPT response for a movie line based on a few keywords '''
-            completion = openai.Completion.create(
-                engine=self.model_engine,
-                prompt="Get a movie line from a character in a movie with the following keywords:" + prompt + " from the movie",
-                max_tokens=1024,
-                n=1,
-                stop=None,
-                temperature=0.8,
-        )
+    def getResponseMovieLine(self, prompt):
+        ''' Generate a GPT response for a movie line based on a few keywords '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt="Get a movie line from a character in a movie with the following keywords:" + prompt + " from the movie",
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+    )
 
         response = completion.choices[0].text
         return response

@@ -179,7 +179,7 @@ def index():
                 <li><a href="{url_for('joke')}">Demo2: Keyword-Based Joke Generator</a></li>
                 <li><a href="{url_for('horror')}">Demo3: Get a horror story by keywords</a></li>
                 <li><a href="{url_for('rap')}">Demo4: Generate a rap battle</a></li>
-                <li><a href="{url_for('rap')}">Demo5: Get a movie line by keywords</a></li>
+                <li><a href="{url_for('movieline')}">Demo5: Get a movie line by keywords</a></li>
             </ul>
         </nav>
         <div class="container">
