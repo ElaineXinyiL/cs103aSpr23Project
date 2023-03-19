@@ -446,7 +446,7 @@ def rap():
 
         '''
     else:
-        return '''
+        return f'''
         <h1>Want an EPIC rap battle? You got it!</h1>
         Name your fighters!!!
         <form method="post">
