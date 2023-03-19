@@ -176,6 +176,7 @@ def index():
                 <li><a href="{url_for('team')}">Team</a></li>
                 <li><a href="{url_for('form1')}">Demo1: Grammar Error Detection</a></li>
                 <li><a href="{url_for('joke')}">Demo2: Keyword-Based Joke Generator</a></li>
+                <li><a href="{url_for('horror')}">Demo3: Get a horror story by keywords</a></li>
             </ul>
         </nav>
         <div class="container">
@@ -207,6 +208,9 @@ def about():
             <h3 class="keyword">Hongqian Li</h3>
             <p>Brandeis 24' MS4 CS</p>
             <p>Demo2: Generate a simple joke based on keywords</p>
+            <h3 class="keyword">Yixuan He</h3>
+            <p>Brandeis 24' MS4 CS</p>
+            <p>Demo2: Get a horror story by keywords</p>
         </div>
     '''
 
@@ -229,6 +233,8 @@ def team():
             <p>developed a form page to find grammar errors, and modified other pages</p>
             <h2 class="keyword">Hongqian Li</h2>
             <p>developed a form page to generate a joke based on keywords, added some basic UI</p>
+            <h2 class="keyword">Yixuan He</h2>
+            <p>developed a form page to get a horror story by keywords</p>
         </div>
     '''
 
@@ -261,13 +267,8 @@ def form1():
         </form>
         '''
 
-
 @app.route('/joke', methods=['GET', 'POST'])
 def joke():
-    ''' handle a get request by sending a form 
-        and a post request by returning the GPT response
-    '''
-    if request.method == 'POST':
         prompt = request.form['prompt']
         answer = gptAPI.getResponseJoke(prompt)
         return f'''
@@ -322,7 +323,33 @@ def joke():
         </html>
         '''
 
+@app.route('/horror', methods=['GET', 'POST'])
+def horror():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt'] 
+        answer = gptAPI.getResponseHorror(prompt)
+        return f'''
+        <h1>Get a horror story by keywords</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        <a href={url_for('horror')}> make another query</a>
 
-if __name__ == '__main__':
+        '''
+    else:
+        return '''
+        <h1>Get a horror story by keywords</h1>
+        Enter your scentences below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
+if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True, port=5001)
