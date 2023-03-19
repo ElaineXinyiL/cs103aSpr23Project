@@ -267,10 +267,11 @@ def form1():
         </form>
         '''
 
+
 @app.route('/joke', methods=['GET', 'POST'])
 def joke():
     ''' handle a get request by sending a form 
-    and a post request by returning the GPT response
+    and a post request by returning the GPT response to generate jokes
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
@@ -327,13 +328,14 @@ def joke():
         </html>
         '''
 
+
 @app.route('/horror', methods=['GET', 'POST'])
 def horror():
     ''' handle a get request by sending a form 
         and a post request by returning the GPT response
     '''
     if request.method == 'POST':
-        prompt = request.form['prompt'] 
+        prompt = request.form['prompt']
         answer = gptAPI.getResponseHorror(prompt)
         return f'''
         <h1>Get a horror story by keywords</h1>
@@ -354,6 +356,7 @@ def horror():
         </form>
         '''
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True, port=5001)
