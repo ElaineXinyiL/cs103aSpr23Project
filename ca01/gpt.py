@@ -72,6 +72,25 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+    def getRapBattle(self,prompt):
+        ''' Generate a GPT response '''
+        full_prompt = f"""
+            Please generate a script of a rap battle between designated persons. You need to play as them credibly, 
+            taking their personal story, contribution or anecdotes into consideration. You also need to bash your 
+            opponent with your smart. Add their name before each one's words. The name of them are {prompt}. Now, 
+            start. Remember, MAKE IT EPIC!"""
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt=full_prompt,
+            max_tokens=2048,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        return response
 
 if __name__=='__main__':
     '''
