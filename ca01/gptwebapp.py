@@ -276,7 +276,7 @@ def form1():
         </html>
         '''
     else:
-        return '''
+        return f'''
         <html>
         <head>
             <title>Find grammar errors</title>
