@@ -110,7 +110,7 @@ class GPT():
         ''' Generate a GPT response for a movie line based on a few keywords '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt="Get a movie line from a character in a movie with the following keywords:" + prompt + " from the movie",
+            prompt="Get a movie line from a character in a movie with the following keywords:" + prompt + " from the movie. The line should exactly include this keyword. The response should follow the pattern: line. -Character, Movie Name",
             max_tokens=1024,
             n=1,
             stop=None,
