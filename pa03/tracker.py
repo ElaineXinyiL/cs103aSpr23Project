@@ -90,7 +90,7 @@ def main():
             args = input('command> ')
             if args == '':
                 continue
-            elif args == 'quit':
+            elif args == 'quit' or args == 'exit':
                 break
             process_args(args.strip().split(' '))
         print('Bye!')
