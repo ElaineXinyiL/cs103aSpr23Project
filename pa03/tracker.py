@@ -24,13 +24,15 @@ def print_usage():
         show: show transactions
         add: add transaction, usage: add amount category date description
         \te.g. add 10.00 food 01/01/2020 lunch
-        6. delete transaction
-        7. summarize transactions by date
+        delete: delete transaction, usage: delete item #
+        \te.g. delete item 1
+        7. summarize transactions by month
         8. summarize transactions by month
         9. summarize transactions by year
-        10. summarize transactions by category
+        summarize transactions by category: usage: sum_by_category
         help: print this menu
         ''')
+
 
 def print_transaction(transactions):
     '''
@@ -43,6 +45,7 @@ def print_transaction(transactions):
     for transaction in transactions:
         print('\t'.join([str(x) for x in transaction]))
 
+
 def process_args(arglist):
     '''
     Process the arguments and call the corresponding functions.
@@ -54,15 +57,16 @@ def process_args(arglist):
         print_transaction(transaction.select_all())
     elif arglist[0] == 'add':
         if len(arglist) != 5:
-            print('Invalid number of arguments. Correct usage: add amount category date description')
+            print(
+                'Invalid number of arguments. Correct usage: add amount category date description')
             return
-        
+
         try:
             amount = float(arglist[1])
         except ValueError:
             print('Invalid amount. Please use a number.')
             return
-        
+
         category = arglist[2]
 
         try:
@@ -71,19 +75,32 @@ def process_args(arglist):
         except ValueError:
             print('Invalid date format. Please use MM/DD/YYYY.')
             return
-        
+
         description = arglist[4]
         transaction.add_transaction(amount, category, date, description)
+    elif arglist[0] == 'delete':
+        if (len(arglist) != 3):
+            print('Invalid number of arguments. Correct usage: delete item #')
+            return
+        try:
+            id = int(arglist[2])
+        except ValueError:
+            print('Invalid id. Please specify an id number.')
+            return
+        transaction.delete_transaction(id)
+    elif arglist[0] == 'sum_by_category':
+        print(transaction.sum_by_category())
     else:
         print(' '.join(arglist), "not implemented. Try 'help' for a list of commands.")
+
 
 def main():
     '''
     Main function of the program.
-    Auther: Ruihao Shen
+    Author: Ruihao Shen
     '''
     if len(sys.argv) == 1:
-        # they didn't pass any arguments, 
+        # they didn't pass any arguments,
         # so prompt for them in a loop
         args = ''
         while True:
@@ -98,7 +115,7 @@ def main():
         # read the args and process them
         args = sys.argv[1:]
         process_args(args)
-        
+
 
 if __name__ == '__main__':
     main()

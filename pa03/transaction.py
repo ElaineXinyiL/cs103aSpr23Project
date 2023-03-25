@@ -19,7 +19,7 @@ class Transaction:
     def __init__(self, db_file) -> None:
         '''
         Initialize the database file and create the table if it does not exist.
-        Auther: Ruihao Shen
+        Author: Ruihao Shen
         '''
         self.db_file = db_file
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions (
@@ -33,22 +33,36 @@ class Transaction:
     def select_all(self):
         '''
         Select all the transactions and return the result.
-        Auther: Ruihao Shen
+        Author: Ruihao Shen
         '''
         return self.run_query('SELECT * FROM transactions')
-    
+
     def add_transaction(self, amount, category, date, description):
         '''
         Add a transaction to the database.
-        Auther: Ruihao Shen
+        Author: Ruihao Shen
         '''
         self.run_query('INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)',
-                        (amount, category, date, description))
+                       (amount, category, date, description))
+
+    def delete_transaction(self, rowid):
+        '''
+        Delete a transaction in the database.
+        Author: Hongqian Li
+        '''
+        self.run_query('DELETE FROM transactions WHERE rowid = (?)', (rowid,))
+
+    def sum_by_category(self):
+        '''
+        Summarize transactions by category.
+        Author: Hongqian Li
+        '''
+        return self.run_query('SELECT category, SUM(amount) FROM transactions GROUP BY category', ())
 
     def run_query(self, query, parameters=()):
         '''
         Run a query on the database and return the result.
-        Auther: Ruihao Shen
+        Author: Ruihao Shen
         '''
         with sqlite3.connect(self.db_file) as con:
             cursor = con.cursor()
