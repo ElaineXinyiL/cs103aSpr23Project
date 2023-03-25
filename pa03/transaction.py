@@ -30,6 +30,21 @@ class Transaction:
             description TEXT
         )''')
 
+    def select_all(self):
+        '''
+        Select all the transactions and return the result.
+        Auther: Ruihao Shen
+        '''
+        return self.run_query('SELECT * FROM transactions')
+    
+    def add_transaction(self, amount, category, date, description):
+        '''
+        Add a transaction to the database.
+        Auther: Ruihao Shen
+        '''
+        self.run_query('INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)',
+                        (amount, category, date, description))
+
     def run_query(self, query, parameters=()):
         '''
         Run a query on the database and return the result.

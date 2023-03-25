@@ -3,9 +3,6 @@ A Python script tracker.py which will allow the user to interact with the databa
 It offers the user the following options and makes calls to the Transaction class to update the database.
 
 0. quit
-1. show categories
-2. add category
-3. modify category
 4. show transactions
 5. add transaction
 6. delete transaction
@@ -24,11 +21,9 @@ import sys
 def print_usage():
     print('''
         quit: quit the program
-        1. show categories
-        2. add category
-        3. modify category
-        4. show transactions
-        5. add transaction
+        show: show transactions
+        add: add transaction, usage: add amount category date description
+        \te.g. add 10.00 food 01/01/2020 lunch
         6. delete transaction
         7. summarize transactions by date
         8. summarize transactions by month
@@ -37,6 +32,17 @@ def print_usage():
         help: print this menu
         ''')
 
+def print_transaction(transactions):
+    '''
+    Print the transactions in a nice format.
+    '''
+    if len(transactions) == 0:
+        print('No transactions found.')
+        return
+    print('item\tamount\tcategory\tdate\t\tdescription')
+    for transaction in transactions:
+        print('\t'.join([str(x) for x in transaction]))
+
 def process_args(arglist):
     '''
     Process the arguments and call the corresponding functions.
@@ -44,6 +50,30 @@ def process_args(arglist):
     transaction = Transaction('tracker.db')
     if arglist == ['help']:
         print_usage()
+    elif arglist == ['show']:
+        print_transaction(transaction.select_all())
+    elif arglist[0] == 'add':
+        if len(arglist) != 5:
+            print('Invalid number of arguments. Correct usage: add amount category date description')
+            return
+        
+        try:
+            amount = float(arglist[1])
+        except ValueError:
+            print('Invalid amount. Please use a number.')
+            return
+        
+        category = arglist[2]
+
+        try:
+            date = arglist[3]
+            datetime.datetime.strptime(arglist[3], '%m/%d/%Y')
+        except ValueError:
+            print('Invalid date format. Please use MM/DD/YYYY.')
+            return
+        
+        description = arglist[4]
+        transaction.add_transaction(amount, category, date, description)
     else:
         print(' '.join(arglist), "not implemented. Try 'help' for a list of commands.")
 
