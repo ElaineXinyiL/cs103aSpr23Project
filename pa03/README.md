@@ -7,6 +7,22 @@
 
 
 ### pylint script:
+1) tracker.py
+```
+PS C:\Users\Irislee\Desktop\22 Fall\SE fundamentals\sql-project\cs103aSpr23Project\pa03> pylint tracker.py
+************* Module tracker
+tracker.py:52:0: R0912: Too many branches (14/12) (too-many-branches)
+
+------------------------------------------------------------------
+Your code has been rated at 9.86/10 (previous run: 9.29/10, +0.57)
+```
+2) transactions.py
+```
+PS C:\Users\Irislee\Desktop\22 Fall\SE fundamentals\sql-project\cs103aSpr23Project\pa03> pylint transaction.py
+
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 9.70/10, +0.30)
+```
 
 ### pytest script:
 ```
