@@ -20,13 +20,13 @@ import sys
 
 def print_usage():
     print('''
-        quit: quit the program
+        quit/exit: quit the program
         show: show transactions
         add: add transaction, usage: add amount category date description
         \te.g. add 10.00 food 2020-01-01 lunch
         delete: delete transaction, usage: delete item #
         \te.g. delete item 1
-        7. summarize transactions by date
+        summarize transactions by date: usage: sum_by_date
         summarize transactions by month: usage: sum_by_month
         summarize transactions by year: usage: sum_by_year
         summarize transactions by category: usage: sum_by_category
