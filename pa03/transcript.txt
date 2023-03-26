@@ -1,0 +1,26 @@
+1. select_all(): 
+- This method selects all the transactions from the database and returns the result.
+
+2. add_transaction(): 
+- This method adds a new transaction to the database. 
+- It takes four parameters: amount, category, date, and description.
+
+3. delete_transaction(): 
+- This method deletes a transaction from the database. 
+- It takes one parameter: rowid, which is the unique identifier of the transaction.
+
+4. sum_by_category(): 
+- This method summarizes transactions by category. 
+- It groups transactions by category and calculates the sum of amounts for each category.
+
+5. sum_by_year(): 
+- This method summarizes transactions by year. 
+- It groups transactions by year and calculates the sum of amounts for each year.
+
+6. sum_by_date(): 
+- This method summarizes transactions by date. 
+- It groups transactions by date and calculates the sum of amounts for each date.
+
+7. sum_by_month(): 
+- This method summarizes transactions by month. 
+- It groups transactions by month and calculates the sum of amounts for each month.
