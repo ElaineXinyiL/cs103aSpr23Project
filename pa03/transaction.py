@@ -67,13 +67,11 @@ class Transaction:
         query = '''
             SELECT strftime('%Y', date) as year, SUM(amount) 
             FROM transactions 
-            WHERE date(date, 'unixepoch') -- Converts the date to YYYY-MM-DD format
             GROUP BY year
             ORDER BY year
         '''
         result = self.run_query(query)
         return result
-
 
     def run_query(self, query, parameters=()):
         '''
