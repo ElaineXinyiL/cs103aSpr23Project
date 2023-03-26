@@ -90,6 +90,10 @@ def process_args(arglist):
         transaction.delete_transaction(id)
     elif arglist[0] == 'sum_by_category':
         print(transaction.sum_by_category())
+    elif arglist[0] == 'sum_by_date':
+        print(transaction.sum_by_date())
+    elif arglist[0] == 'sum_by_year':
+        print(transaction.sum_by_year())
     else:
         print(' '.join(arglist), "not implemented. Try 'help' for a list of commands.")
 
