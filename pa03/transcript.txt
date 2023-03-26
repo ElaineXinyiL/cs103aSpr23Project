@@ -1,26 +1,100 @@
-1. select_all(): 
-- This method selects all the transactions from the database and returns the result.
 
-2. add_transaction(): 
+1. show transactions: select_all() 
+- This method selects all the transactions from the database and returns the result.
+- usage: command> show
+          item    amount  category        date            description
+          1       4.32    food    2023-03-07      dunki
+          2       6.52    food    2023-03-01      mcdonald
+          3       5.29    food    2023-03-08      wendy
+          4       32.65   grocery 2023-03-15      Hannaford
+          5       54.16   grocery 2023-03-15      MB
+          6       10.29   grocery 2023-03-15      Walgreen
+          7       1.7     transportation  2023-03-06      bustoschool
+          8       3.2     transportation  2023-03-12      boston_subway
+          9       10.0    entertainment   2023-03-01      iceskating
+          10      13.5    entertainment   2023-03-17      movies
+          11      875.0   housing 2022-12-01      monthly_rent
+          12      875.0   housing 2022-01-01      monthly_rent
+
+2. add transaction: add_transaction()
 - This method adds a new transaction to the database. 
 - It takes four parameters: amount, category, date, and description.
+- usage: command> add 875 housing 2023-03-01 monthly_rent 
+         command> show 
+          item    amount  category        date            description
+          1       4.32    food    2023-03-07      dunki
+          2       6.52    food    2023-03-01      mcdonald
+          3       5.29    food    2023-03-08      wendy
+          4       32.65   grocery 2023-03-15      Hannaford
+          5       54.16   grocery 2023-03-15      MB
+          6       10.29   grocery 2023-03-15      Walgreen
+          7       1.7     transportation  2023-03-06      bustoschool
+          8       3.2     transportation  2023-03-12      boston_subway
+          9       10.0    entertainment   2023-03-01      iceskating
+          10      13.5    entertainment   2023-03-17      movies
+          11      875.0   housing 2022-12-01      monthly_rent
+          12      875.0   housing 2022-01-01      monthly_rent
+          13      875.0   housing 2023-03-01      monthly_rent
 
-3. delete_transaction(): 
+3. delete transaction: delete_transaction()
 - This method deletes a transaction from the database. 
 - It takes one parameter: rowid, which is the unique identifier of the transaction.
+- usage: command> delete item 13
+         command> show 
+          item    amount  category        date            description
+          1       4.32    food    2023-03-07      dunki
+          2       6.52    food    2023-03-01      mcdonald
+          3       5.29    food    2023-03-08      wendy
+          4       32.65   grocery 2023-03-15      Hannaford
+          5       54.16   grocery 2023-03-15      MB
+          6       10.29   grocery 2023-03-15      Walgreen
+          7       1.7     transportation  2023-03-06      bustoschool
+          8       3.2     transportation  2023-03-12      boston_subway
+          9       10.0    entertainment   2023-03-01      iceskating
+          10      13.5    entertainment   2023-03-17      movies
+          11      875.0   housing 2022-12-01      monthly_rent
+          12      875.0   housing 2022-01-01      monthly_rent
 
-4. sum_by_category(): 
+4. summarize transactions by category: sum_by_category()
 - This method summarizes transactions by category. 
 - It groups transactions by category and calculates the sum of amounts for each category.
+- usage: command> sum_by_category
+          [('entertainment', 23.5), ('food', 16.13), ('grocery', 97.1), ('housing', 1750.0), ('transportation', 4.9)]
 
-5. sum_by_year(): 
+5. summarize transactions by year: sum_by_year()
 - This method summarizes transactions by year. 
 - It groups transactions by year and calculates the sum of amounts for each year.
+- usage: command> sum_by_year
+          [('2022', 1750.0), ('2023', 141.63)]
 
-6. sum_by_date(): 
+6. summarize transactions by date: sum_by_date()
 - This method summarizes transactions by date. 
 - It groups transactions by date and calculates the sum of amounts for each date.
+- usage: command> sum_by_date
+          [('2022-01-01', 875.0), ('2022-12-01', 875.0), ('2023-03-01', 16.52), ('2023-03-06', 1.7), ('2023-03-07', 4.32), ('2023-03-08', 5.29), ('2023-03-12', 3.2), ('2023-03-15', 97.1), ('2023-03-17', 13.5)]
 
-7. sum_by_month(): 
+7. summarize transactions by month: sum_by_month()
 - This method summarizes transactions by month. 
 - It groups transactions by month and calculates the sum of amounts for each month.
+- usage: command> sum_by_month
+          [('2022-01', 875.0), ('2022-12', 875.0), ('2023-03', 141.63)]
+
+8. print this menu: print_usage()
+- This method demonstrate the list of available functions/features and their example cases
+- usage: command> help
+      quit/exit: quit the program
+      show: show transactions
+      add: add transaction, usage: add amount category date description
+              e.g. add 10.00 food 2020-01-01 lunch
+      delete: delete transaction, usage: delete item #
+              e.g. delete item 1
+      summarize transactions by date: usage: sum_by_date
+      summarize transactions by month: usage: sum_by_month
+      summarize transactions by year: usage: sum_by_year
+      summarize transactions by category: usage: sum_by_category
+      help: print this menu
+
+9. exit/quit:
+- This method quits the current program 
+- usage: command> quit
+          Bye!
