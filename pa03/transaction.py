@@ -72,6 +72,20 @@ class Transaction:
         '''
         result = self.run_query(query)
         return result
+    
+    def sum_by_date(self):
+        '''
+        Summarize transactions by date.
+        Author: Yixuan He
+        '''
+        query = '''
+            SELECT strftime('%Y-%m-%d', date) as date, SUM(amount) 
+            FROM transactions
+            GROUP BY date
+            ORDER BY date
+        '''
+        result = self.run_query(query, ())
+        return result
 
     def sum_by_month(self):
         '''
