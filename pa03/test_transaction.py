@@ -116,6 +116,26 @@ def test_sum_by_date():
     # Check if the results of sum_by_date are correct
     assert transaction.sum_by_date() == [('2020-01-01', 10.0), ('2020-02-01', 20.0), ('2021-03-01', 90.0)]
 
+def test_sum_by_month():
+    '''
+    Test that sum_by_month summarizes transactions by month correctly
+    Author: Xin Yi Liu
+    '''
+    # Create a new transaction instance and clear existing transactions
+    transaction = Transaction('test.db')
+    for t in transaction.select_all():
+        transaction.delete_transaction(t[0])
+
+    # Add new transactions for the test
+    transaction.add_transaction(10.0, 'food', '2020-01-01', 'lunch')
+    transaction.add_transaction(20.0, 'entertainment', '2020-02-01', 'movie')
+    transaction.add_transaction(30.0, 'food', '2021-03-01', 'dinner')
+    transaction.add_transaction(25.0, 'food', '2022-03-01', 'dinner')
+    transaction.add_transaction(30.0, 'food', '2022-03-01', 'dinner')
+
+    # Check if the results of sum_by_year are correct
+    assert transaction.sum_by_month() == [('2020-01', 10.0),('2020-02', 20.0),('2021-03', 30.0),('2022-03', 55.0)]
+    
 def test_run_query(transaction, tuples):
     '''
     Test that run_query executes a query and returns the correct result
