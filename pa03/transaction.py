@@ -87,6 +87,20 @@ class Transaction:
         result = self.run_query(query, ())
         return result
 
+    def sum_by_month(self):
+        '''
+        Summarize transactions by month.
+        Author: Xin Yi Liu
+        '''
+        query = '''
+            SELECT strftime("%Y-%m", date) as month, SUM(amount) 
+            FROM transactions 
+            GROUP BY month
+            ORDER BY month
+        '''
+        result = self.run_query(query)
+        return result
+
     def run_query(self, query, parameters=()):
         '''
         Run a query on the database and return the result.

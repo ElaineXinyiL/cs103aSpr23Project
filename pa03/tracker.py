@@ -26,9 +26,9 @@ def print_usage():
         \te.g. add 10.00 food 2020-01-01 lunch
         delete: delete transaction, usage: delete item #
         \te.g. delete item 1
-        7. summarize transactions by month
-        8. summarize transactions by month
-        9. summarize transactions by year
+        7. summarize transactions by date
+        summarize transactions by month: usage: sum_by_month
+        summarize transactions by year: usage: sum_by_year
         summarize transactions by category: usage: sum_by_category
         help: print this menu
         ''')
@@ -92,8 +92,11 @@ def process_args(arglist):
         print(transaction.sum_by_category())
     elif arglist[0] == 'sum_by_date':
         print(transaction.sum_by_date())
+    elif arglist[0] == 'sum_by_month':
+        print(transaction.sum_by_month())
     elif arglist[0] == 'sum_by_year':
         print(transaction.sum_by_year())
+
     else:
         print(' '.join(arglist), "not implemented. Try 'help' for a list of commands.")
 
