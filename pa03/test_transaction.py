@@ -14,9 +14,9 @@ def tuples():
     Author: Ruihao Shen
     '''
     return [
-        (1, 1.0, 'food', '01/01/2018', 'test'),
-        (2, 2.0, 'food', '01/01/2018', 'test'),
-        (3, 3.0, 'food', '01/01/2018', 'test'),
+        (1, 1.0, 'food', '2018-01-01', 'test'),
+        (2, 2.0, 'food', '2018-01-01', 'test'),
+        (3, 3.0, 'food', '2018-01-01', 'test'),
     ]
 
 @pytest.fixture
@@ -60,8 +60,8 @@ def test_add_transaction(transaction, tuples):
     Test that add_transaction adds a transaction to the database.
     Author: Ruihao Shen
     '''
-    transaction.add_transaction(4.0, 'food', '01/01/2018', 'test')
-    assert transaction.select_all() == tuples + [(4, 4.0, 'food', '01/01/2018', 'test')]
+    transaction.add_transaction(4.0, 'food', '2018-01-01', 'test')
+    assert transaction.select_all() == tuples + [(4, 4.0, 'food', '2018-01-01', 'test')]
 
 def test_delete_transaction(transaction, tuples):
     '''
