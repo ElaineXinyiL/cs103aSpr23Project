@@ -1,17 +1,26 @@
-PA03 Finance Tracker - using SQL, pytest, and pylint
+## PA03 Finance Tracker - using SQL, pytest, and pylint
 
-#Functions included:
+### Functions included:
 1. Supports CRUD operations (Create, Read, Update, Delete) on expenses and aggregation(with SQLite3) 
 2. Incorporated with automated testing (with pytest) 
 3. Fields stored for transactions: 'item #', 'amount', 'category', 'date', 'description'
 
 
-#pylint Script:
+### pylint script:
 
-#pytest Script:
+### pytest script:
+```
+================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.10, pytest-7.2.1, pluggy-1.0.0
+rootdir: C:\Users\Irislee\Desktop\22 Fall\SE fundamentals\sql-project\cs103aSpr23Project\pa03
+collected 8 items
 
+test_transaction.py ........                                                                                                                        [100%]
 
-#tracker.py Script:
+=================================================================== 8 passed in 0.80s ====================================================================
+```
+
+### tracker.py script:
 ```
 PS C:\Users\Irislee\Desktop\22 Fall\SE fundamentals\sql-project\cs103aSpr23Project\pa03> python3 tracker.py
 command> help
