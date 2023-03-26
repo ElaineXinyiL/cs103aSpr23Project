@@ -23,7 +23,7 @@ def print_usage():
         quit: quit the program
         show: show transactions
         add: add transaction, usage: add amount category date description
-        \te.g. add 10.00 food 01/01/2020 lunch
+        \te.g. add 10.00 food 2020-01-01 lunch
         delete: delete transaction, usage: delete item #
         \te.g. delete item 1
         7. summarize transactions by month
@@ -71,9 +71,9 @@ def process_args(arglist):
 
         try:
             date = arglist[3]
-            datetime.datetime.strptime(arglist[3], '%m/%d/%Y')
+            datetime.datetime.strptime(arglist[3], '%Y-%m-%d')
         except ValueError:
-            print('Invalid date format. Please use MM/DD/YYYY.')
+            print('Invalid date format. Please use YYYY-MM-DD.')
             return
 
         description = arglist[4]
