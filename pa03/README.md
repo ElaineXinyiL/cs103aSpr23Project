@@ -12,6 +12,7 @@ PA03 Finance Tracker - using SQL, pytest, and pylint
 
 
 #tracker.py Script:
+```
 PS C:\Users\Irislee\Desktop\22 Fall\SE fundamentals\sql-project\cs103aSpr23Project\pa03> python3 tracker.py
 command> help
 
@@ -88,3 +89,4 @@ command> random input
 random input not implemented. Try 'help' for a list of commands.
 command> exit
 Bye!
+```
