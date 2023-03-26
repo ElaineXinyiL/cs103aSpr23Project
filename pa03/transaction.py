@@ -79,7 +79,7 @@ class Transaction:
         Author: Yixuan He
         '''
         query = '''
-            SELECT strftime('%Y-%m-%d', date) as date, SUM(amount)
+            SELECT strftime('%Y-%m-%d', date) as date, SUM(amount) 
             FROM transactions
             GROUP BY date
             ORDER BY date
