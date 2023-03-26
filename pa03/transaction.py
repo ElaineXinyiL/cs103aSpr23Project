@@ -43,7 +43,7 @@ class Transaction:
         Author: Ruihao Shen
         '''
         self.run_query('INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)',
-                       (amount, category, date, description))
+        (amount, category, date, description))
 
     def delete_transaction(self, rowid):
         '''
