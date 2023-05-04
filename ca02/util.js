@@ -9,7 +9,7 @@ require("dotenv").config();
 /* **************************************** */
 
 function isLoggedIn(req, res, next) {
-  "if they are logged in, continue; otherwise redirect to /login "
+  // if they are logged in, continue; otherwise redirect to /login
   if (res.locals.loggedIn) {
     next();
   } else {

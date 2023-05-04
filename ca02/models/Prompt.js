@@ -6,6 +6,7 @@ var promptSchema = Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   requests: String,
   answer: String,
+  createdAt: {type: Date, default: Date.now},
 });
 
 module.exports = mongoose.model("Prompt", promptSchema);
