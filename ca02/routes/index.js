@@ -6,6 +6,7 @@ const aboutRouter = require('./about');
 const teamRouter = require('./team');
 const jokeRouter = require('./joke');
 const horrorRouter = require('./horror');
+const rapRouter = require('./rap');
 const grammarRouter = require('./grammar');
 
 
@@ -16,6 +17,7 @@ router.use(aboutRouter);
 router.use(teamRouter);
 router.use(jokeRouter);
 router.use(horrorRouter);
+router.use(rapRouter);
 router.use(grammarRouter);
 
 module.exports = router;
