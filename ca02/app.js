@@ -15,7 +15,7 @@ const User = require('./models/User');
 /* **************************************** */
 /*  Connecting to a Mongo Database Server   */
 /* **************************************** */
-const mongodb_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/gptdemo';
+const mongodb_URI = process.env.MONGODB_URI || 'mongodb://0.0.0.0:27017/gptdemo';
 ('MONGODB_URI=',process.env.MONGODB_URI);
 
 const mongoose = require( 'mongoose' );
@@ -71,7 +71,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.use(layouts);
 
 
