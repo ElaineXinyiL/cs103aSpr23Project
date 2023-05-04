@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const PromptItem = require('../models/Prompt');
 const { isLoggedIn, openai } = require("../util");
 
 router.get("/rap",
   isLoggedIn,
-  (req, res) => {
-    res.render("rap/index");
+  async (req, res, next) => {
+    const items = await PromptItem.find({userId:req.user._id})
+                                  .sort({createdAt:1});
+    res.render("rap/index", {items});
 });
 
 router.post("/rap", 
   isLoggedIn,
-  async (req, res) => {
+  async (req, res, next) => {
     const prompt = req.body.prompt;
     try {
       const completion = await openai.createCompletion({
@@ -20,6 +23,13 @@ router.post("/rap",
         max_tokens: 1024,
       });
 
+      // save prompt and answer to database
+      const promptItem = new PromptItem({
+        userId: req.user._id,
+        requests: prompt,
+        answer: completion.data.choices[0].text});
+      await promptItem.save();
+      
       // pass prompt and answer parameters
       res.render(
         "rap/result", 

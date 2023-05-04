@@ -17,5 +17,22 @@
         <p><input type=submit value="get response">
       </form>
     </div>
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th> Battlers </th>
+            <th> Response </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach(item => { %>
+            <tr>
+              <td> <%= item.requests %> </td>
+              <td> <%= item.answer.slice(0, 10) %> </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
   </body>
 </html>
