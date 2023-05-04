@@ -71,7 +71,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const port = process.env.PORT || 3000;
 app.use(layouts);
 
 
@@ -96,8 +95,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// listen to specified app
-app.listen(port, () => console.log(`Server is running on port ${port}!`));
 
 module.exports = app;
