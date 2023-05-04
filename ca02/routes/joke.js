@@ -12,12 +12,14 @@ router.post("/joke", async (req, res) => {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: prompt,
+      prompt: "Generate a joke based on following keywords, be specific" + prompt,
       temperature: 0.8,
+      max_tokens: 1024,
     });
+
     // pass prompt and answer parameters
     res.render(
-      "/joke/result", 
+      "joke/result", 
       {prompt: prompt, answer: completion.data.choices[0].text}
     )
   } catch(error) {

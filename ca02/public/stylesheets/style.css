@@ -23,7 +23,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
+  margin: 2rem;
 }
 pre {
   font-size: 1.8rem;
@@ -126,4 +126,18 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: #0097a7;
+}
+
+.log {
+  color: #0097a7;
+}
+
+.log:hover {
+  text-decoration: underline;
+}
+
+.log-button {
+  padding: 7px 15px!important;
+  margin: 10px 0;
+  font-size: 13px!important;
 }
