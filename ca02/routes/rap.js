@@ -29,15 +29,32 @@ router.post("/rap",
         requests: prompt,
         answer: completion.data.choices[0].text});
       await promptItem.save();
-      
+
       // pass prompt and answer parameters
       res.render(
         "rap/result", 
         {prompt: prompt, answer: completion.data.choices[0].text}
-      )
+      );
     } catch(error) {
       console.log(error);
     }
+});
+
+router.get("/rap/result/:id",
+  isLoggedIn,
+  async (req, res, next) => {
+    const promptItem = await PromptItem.findOne({_id:req.params.id});
+    res.render("rap/result", {
+      prompt: promptItem.requests,
+      answer: promptItem.answer,
+    });
+});
+
+router.get("/rap/remove/:id",
+  isLoggedIn,
+  async (req, res, next) => {
+    await PromptItem.deleteOne({_id:req.params.id});
+    res.redirect("/rap");
 });
 
 function generatePrompt(prompt) {

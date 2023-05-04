@@ -21,15 +21,21 @@
       <table>
         <thead>
           <tr>
+            <th> Time </th>
             <th> Battlers </th>
             <th> Response </th>
+            <th> </th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>
           <% items.forEach(item => { %>
             <tr>
+              <td> <%= item.createdAt %> </td>
               <td> <%= item.requests %> </td>
-              <td> <%= item.answer.slice(0, 10) %> </td>
+              <td> <%= item.answer.slice(0, 15) %> </td>
+              <td> <a href="/rap/result/<%= item._id %>">Details</a> </td>
+              <td> <a href="/rap/remove/<%= item._id %>">Remove</a> </td>
             </tr>
           <% }) %>
         </tbody>
