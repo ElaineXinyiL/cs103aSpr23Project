@@ -8,4 +8,4 @@ var promptSchema = Schema({
   answer: String,
 });
 
-module.exports = mongoose.model("Prompt", userSchema);
+module.exports = mongoose.model("Prompt", promptSchema);
