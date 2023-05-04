@@ -10,7 +10,7 @@ router.get("/grammar", (req, res) => {
 
 router.post("/grammar", async (req, res) => {
   const prompt = req.body.prompt;
-  const request =  "check grammar" + prompt;
+  const request =  "check grammar: " + prompt;
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
