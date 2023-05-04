@@ -7,6 +7,7 @@ const teamRouter = require('./team');
 const jokeRouter = require('./joke');
 const horrorRouter = require('./horror');
 const rapRouter = require('./rap');
+const grammarRouter = require('./grammar');
 
 
 // configure router to use above routes
@@ -17,5 +18,6 @@ router.use(teamRouter);
 router.use(jokeRouter);
 router.use(horrorRouter);
 router.use(rapRouter);
+router.use(grammarRouter);
 
 module.exports = router;
