@@ -18,7 +18,7 @@
       </form>
     </div>
     <div class="container">
-      <table>
+      <table class="styled-table">
         <thead>
           <tr>
             <th> Time </th>
@@ -31,7 +31,10 @@
         <tbody>
           <% items.forEach(item => { %>
             <tr>
-              <td> <%= item.createdAt %> </td>
+              <% let time = item.createdAt; %>
+              <% let timeArray = time.toString().split(" "); %>
+              <% time = timeArray[1]+" " + timeArray[2]+" "  + timeArray[3]+" "  + timeArray[4]+" "  + timeArray[5]; %>
+              <td><%= time %></td>
               <td> <%= item.requests %> </td>
               <td> <%= item.answer.slice(0, 15) + '...' %> </td>
               <td> <a href="/rap/result/<%= item._id %>">Details</a> </td>

@@ -6,7 +6,7 @@ const { isLoggedIn, openai } = require("../util");
 router.get("/rap",
   isLoggedIn,
   async (req, res, next) => {
-    const items = await PromptItem.find({userId:req.user._id})
+    const items = await PromptItem.find({userId:req.user._id, demo:"rap"})
                                   .sort({createdAt:1});
     res.render("rap/index", {items});
 });
@@ -27,7 +27,9 @@ router.post("/rap",
       const promptItem = new PromptItem({
         userId: req.user._id,
         requests: prompt,
-        answer: completion.data.choices[0].text});
+        answer: completion.data.choices[0].text,
+        demo: "rap",
+      });
       await promptItem.save();
 
       // pass prompt and answer parameters
