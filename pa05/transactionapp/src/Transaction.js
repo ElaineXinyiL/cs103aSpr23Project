@@ -204,7 +204,7 @@ export default function Transaction() {
             </thead>
             <tbody>
               {summarizeItemsByMonth.map((item) => (
-                <tr key={item.month}>
+                <tr>
                   <td>{item.year}-{item.month}</td>
                   <td>{item.amount}</td>
                   <td>{item.count}</td>
