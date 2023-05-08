@@ -129,7 +129,7 @@ export default function Transaction() {
 
   /**
    * content to show - all items or summarized items
-   * edited by Yixuan He, Ruihao Shen, Hongqian Li
+   * edited by Yixuan He, Ruihao Shen, Hongqian Li, Xinyi Liu
    */
   let content;
   switch (summarize) {
