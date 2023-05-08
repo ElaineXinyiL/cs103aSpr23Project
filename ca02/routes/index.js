@@ -8,6 +8,7 @@ const jokeRouter = require('./joke');
 const horrorRouter = require('./horror');
 const rapRouter = require('./rap');
 const grammarRouter = require('./grammar');
+const movieRouter = require('./movie');
 
 
 // configure router to use above routes
@@ -19,5 +20,6 @@ router.use(jokeRouter);
 router.use(horrorRouter);
 router.use(rapRouter);
 router.use(grammarRouter);
+router.use(movieRouter);
 
 module.exports = router;
