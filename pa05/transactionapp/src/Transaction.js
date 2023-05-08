@@ -212,9 +212,6 @@ export default function Transaction() {
               ))}
             </tbody>
           </table>
-          <pre>
-          {JSON.stringify(summarizeItemsByMonth, null, 5)}
-          </pre>
         </>
       );
       break;
