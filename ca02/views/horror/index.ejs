@@ -1,21 +1,51 @@
 <html>
-  <head>
-      <title>Horror Story Generator</title>
-  </head>
-  <body>
-      <header>
-      <h2>Horror Story Generator</h2>
-      </header>
-      <div class="front">
-          <h2>Generate a horror story based on keywords</h2>
-          <hr>
-          <h3>Type in a few keywords:</h3>
-      </div>
-      <div class="text-form">
-          <form method="post">
-              <textarea name="prompt"></textarea>
-              <p><input type=submit value="get response">
-          </form>
-      </div>
-  </body>
+
+<head>
+    <title>Horror Story Generator</title>
+</head>
+
+<body>
+    <header>
+        <h2>Horror Story Generator</h2>
+    </header>
+    <div class="front">
+        <h2>Generate a horror story based on keywords</h2>
+        <hr>
+        <h3>Type in a few keywords:</h3>
+    </div>
+    <div class="text-form">
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+    </div>
+    <div class="container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th> Time </th>
+                    <th> Keywords </th>
+                    <th> Response </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.forEach(item=> { %>
+                    <tr>
+                        <% let time=item.createdAt; %>
+                            <% let timeArray=time.toString().split(" "); %>
+                <% time = timeArray[1]+" " + timeArray[2]+" "  + timeArray[3]+" "  + timeArray[4]+" "  + timeArray[5]; %>
+                <td><%= time %></td>
+                <td> <%= item.requests %> </td>
+                <td> <%= item.answer.slice(0, 15) + '...' %> </td>
+                <td> <a href=" /rap/result/<%=item._id %>">Details</a> </td>
+                                <td> <a href="/rap/remove/<%= item._id %>">Remove</a> </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
 </html>
