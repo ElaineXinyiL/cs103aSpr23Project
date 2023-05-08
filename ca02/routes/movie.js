@@ -1,13 +1,25 @@
 const express = require('express');
 const router = express.Router();
-// const User = require('../models/User')
+const PromptItem = require('../models/Prompt');
 const {
+    isLoggedIn,
     openai
 } = require("../util");
 
-router.get("/movie", (req, res) => {
-    res.render("movie");
-});
+router.get("/movie",
+    isLoggedIn,
+    async (req, res, next) => {
+        const items = await PromptItem.find({
+                userId: req.user._id,
+                demo: "movie"
+            })
+            .sort({
+                createdAt: 1
+            });
+        res.render("movie", {
+            items
+        });
+    });
 
 router.post("/movie", async (req, res) => {
     const prompt = req.body.prompt;
@@ -19,7 +31,16 @@ router.post("/movie", async (req, res) => {
             max_tokens: 1024,
         });
 
-        console.log(completion.propmt);
+        // save prompt and answer to database
+        const promptItem = new PromptItem({
+            userId: req.user._id,
+            requests: prompt,
+            answer: completion.data.choices[0].text,
+            demo: "movie",
+        });
+        await promptItem.save();
+
+
         // pass prompt and answer parameters
         res.render(
             "movie/result", {
@@ -31,5 +52,27 @@ router.post("/movie", async (req, res) => {
         console.log(error);
     }
 });
+
+router.get("/movie/result/:id",
+    isLoggedIn,
+    async (req, res, next) => {
+        const promptItem = await PromptItem.findOne({
+            _id: req.params.id
+        });
+        res.render("movie/result", {
+            prompt: promptItem.requests,
+            answer: promptItem.answer,
+        });
+    });
+
+router.get("/movie/remove/:id",
+    isLoggedIn,
+    async (req, res, next) => {
+        await PromptItem.deleteOne({
+            _id: req.params.id
+        });
+        res.redirect("/movie");
+    });
+
 
 module.exports = router;
