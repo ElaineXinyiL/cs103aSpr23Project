@@ -70,6 +70,29 @@ export default function Transaction() {
     }, []);
   }
 
+    /**
+   * summarize the transaction by year
+   * written by Hongqian Li
+   */
+    function summarizeByYear() {
+      console.log("summarize by year");
+      return items.reduce((acc, item) => {
+        const year = new Date(item.date).getFullYear();
+        const found = acc.find((x) => x.year === year);
+        if (found) {
+          found.amount += parseFloat(item.amount);
+          found.count += 1;
+        } else {
+          acc.push({
+            year: year,
+            amount: parseFloat(item.amount),
+            count: 1,
+          });
+        }
+        return acc;
+      }, []);
+    }
+
   /**
    * update the amount
    * written by Yixuan He
@@ -81,7 +104,7 @@ export default function Transaction() {
 
   /**
    * content to show - all items or summarized items
-   * edited by Yixuan He, Ruihao Shen
+   * edited by Yixuan He, Ruihao Shen, Hongqian Li
    */
   let content;
   switch (summarize) {
@@ -112,6 +135,34 @@ export default function Transaction() {
         </>
       );
       break;
+
+    case "year":
+      const summarizeItemsByYear = summarizeByYear();
+      content = (
+        <>
+          <h2>Summarize by Year</h2>
+
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Amount</th>
+                <th>Item count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {summarizeItemsByYear.map((item) => (
+                <tr key={item.year}>
+                  <td>{item.year}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      );
+     break;
     default:
       content = (
         <>
