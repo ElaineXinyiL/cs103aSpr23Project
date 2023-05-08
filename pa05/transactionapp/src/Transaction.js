@@ -54,7 +54,8 @@ export default function Transaction() {
    */
   function summarizeByDate() {
     console.log("summarize by date");
-    return items.reduce((acc, item) => { // copilot helped here, very smart use of reduce
+    return items.reduce((acc, item) => {
+      // copilot helped here, very smart use of reduce
       const found = acc.find((x) => x.date === item.date);
       if (found) {
         found.amount += parseFloat(item.amount);
@@ -70,28 +71,52 @@ export default function Transaction() {
     }, []);
   }
 
-    /**
+  /**
    * summarize the transaction by year
    * written by Hongqian Li
    */
-    function summarizeByYear() {
-      console.log("summarize by year");
-      return items.reduce((acc, item) => {
-        const year = new Date(item.date).getFullYear();
-        const found = acc.find((x) => x.year === year);
-        if (found) {
-          found.amount += parseFloat(item.amount);
-          found.count += 1;
-        } else {
-          acc.push({
-            year: year,
-            amount: parseFloat(item.amount),
-            count: 1,
-          });
-        }
-        return acc;
-      }, []);
-    }
+  function summarizeByYear() {
+    console.log("summarize by year");
+    return items.reduce((acc, item) => {
+      const year = new Date(item.date).getFullYear();
+      const found = acc.find((x) => x.year === year);
+      if (found) {
+        found.amount += parseFloat(item.amount);
+        found.count += 1;
+      } else {
+        acc.push({
+          year: year,
+          amount: parseFloat(item.amount),
+          count: 1,
+        });
+      }
+      return acc;
+    }, []);
+  }
+  /**
+   * summarize the transaction by year
+   * written by Xinyi Liu
+   */
+  function summarizeByMonth() {
+    console.log("summarize by month");
+    return items.reduce((acc, item) => {
+      const year = new Date(item.date).getFullYear();
+      const month = new Date(item.date).getMonth() + 1;
+      const found = acc.find((x) => x.year === year && x.month === month);
+      if (found) {
+        found.amount += parseFloat(item.amount);
+        found.count += 1;
+      } else {
+        acc.push({
+          year: year,
+          month: month,
+          amount: parseFloat(item.amount),
+          count: 1,
+        });
+      }
+      return acc;
+    }, []);
+  }
 
   /**
    * update the amount
@@ -162,7 +187,37 @@ export default function Transaction() {
           </table>
         </>
       );
-     break;
+      break;
+    case "month":
+      const summarizeItemsByMonth = summarizeByMonth();
+      content = (
+        <>
+          <h2>Summarize by Month</h2>
+
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Item count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {summarizeItemsByMonth.map((item) => (
+                <tr key={item.month}>
+                  <td>{item.year}-{item.month}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <pre>
+          {JSON.stringify(summarizeItemsByMonth, null, 5)}
+          </pre>
+        </>
+      );
+      break;
     default:
       content = (
         <>
@@ -187,7 +242,9 @@ export default function Transaction() {
                   <td>{transaction.description}</td>
                   <td>
                     <button
-                      onClick={() => handleDeleteTransaction(transaction.itemId)}
+                      onClick={() =>
+                        handleDeleteTransaction(transaction.itemId)
+                      }
                       class="btn btn-primary"
                     >
                       Delete
@@ -244,7 +301,9 @@ export default function Transaction() {
                 />
               </label>
             </div>
-            <button type="submit" class="btn btn-primary">Add Transaction</button>
+            <button type="submit" class="btn btn-primary">
+              Add Transaction
+            </button>
           </form>
         </>
       );
@@ -255,11 +314,41 @@ export default function Transaction() {
       <h1 className="bg-warning text-center p-2">Transaction</h1>
 
       <div className="container">
-        <button type="button" class="btn btn-primary me-2" onClick={() => setSummarize("")}>Show all transactions</button>
-        <button type="button" class="btn btn-primary me-2" onClick={() => setSummarize("date")}>Summarize by date</button>
-        <button type="button" class="btn btn-primary me-2" onClick={() => setSummarize("month")}>Summarize by month</button>
-        <button type="button" class="btn btn-primary me-2" onClick={() => setSummarize("year")}>Summarize by year</button>
-        <button type="button" class="btn btn-primary me-2" onClick={() => setSummarize("category")}>Summarize by category</button>
+        <button
+          type="button"
+          class="btn btn-primary me-2"
+          onClick={() => setSummarize("")}
+        >
+          Show all transactions
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary me-2"
+          onClick={() => setSummarize("date")}
+        >
+          Summarize by date
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary me-2"
+          onClick={() => setSummarize("month")}
+        >
+          Summarize by month
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary me-2"
+          onClick={() => setSummarize("year")}
+        >
+          Summarize by year
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary me-2"
+          onClick={() => setSummarize("category")}
+        >
+          Summarize by category
+        </button>
       </div>
 
       {content}
