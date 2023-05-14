@@ -119,6 +119,29 @@ export default function Transaction() {
   }
 
   /**
+   * summarize the transaction by category
+   * written by Yichun Huang
+   */
+  function summarizeByCategory() {
+    console.log("summarize by category");
+    return items.reduce((acc, item) => {
+      const found = acc.find((x) => x.category === item.category);
+      if (found) {
+        found.amount += parseFloat(item.amount);
+        found.count += 1;
+      } else {
+        acc.push({
+          category: item.category,
+          amount: parseFloat(item.amount),
+          count: 1,
+        });
+      }
+      return acc;
+    }, []);
+  }
+
+
+  /**
    * update the amount
    * written by Yixuan He
    */
@@ -129,7 +152,7 @@ export default function Transaction() {
 
   /**
    * content to show - all items or summarized items
-   * edited by Yixuan He, Ruihao Shen, Hongqian Li, Xinyi Liu
+   * edited by Yixuan He, Ruihao Shen, Hongqian Li, Xinyi Liu, Yichun Huang
    */
   let content;
   switch (summarize) {
@@ -214,6 +237,33 @@ export default function Transaction() {
           </table>
         </>
       );
+      break;
+      case "category":
+        const summarizeItemsByCategory = summarizeByCategory();
+        content = (
+          <>
+            <h2>Summarize by Category</h2>
+      
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Item count</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summarizeItemsByCategory.map((item) => (
+                  <tr key={item.category}>
+                    <td>{item.category}</td>
+                    <td>{item.amount}</td>
+                    <td>{item.count}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        );
       break;
     default:
       content = (
